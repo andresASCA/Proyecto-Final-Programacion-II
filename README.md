@@ -185,6 +185,100 @@ El archivo `mapa.html` es una página web interactiva diseñada para que el usua
    - Longitud
 5. Descarga este archivo en el equipo del usuario y cierra automáticamente la ventana del mapa.
 
+## Paquete `Servicio`
+
+![image](https://github.com/user-attachments/assets/8b996c6e-bdcf-414a-bb1f-c226962cbc2e)
+
+
+El paquete `Servicio` contiene las clases encargadas de realizar las operaciones principales del sistema, como guardar reportes, conectarse con Firebase, enviar correos y manejar la lógica central de comunicación entre la interfaz y la base de datos.
+
+### Clase `BacheService`
+
+![image](https://github.com/user-attachments/assets/ec232d3b-f557-4e1b-a094-82cefa2c7882)
+
+![image](https://github.com/user-attachments/assets/69df3802-1f56-4c24-947e-011977e6a009)
+
+
+Esta clase es esencial porque conecta la interfaz con la base de datos, gestionando el almacenamiento de reportes y manejando errores para mejorar la experiencia del usuario.
+
+La clase `BacheService` es la encargada de guardar los reportes de baches tanto localmente como en la base de datos de Firebase. Implementa la interfaz `RegistroBaches`, que define los métodos que debe cumplir cualquier clase que maneje el registro de baches.
+
+**Funciones principales:**
+
+- `guardarBache(ReporteBache bache)`:
+  - Genera un ID único.
+  - Guarda el bache en una lista local para consulta inmediata.
+  - Envía el bache a Firebase.
+  - Muestra un mensaje de confirmación si la operación es exitosa.
+
+- `obtenerBachesLocales()`:
+  - Devuelve la lista de baches guardados localmente durante la sesión actual.
+
+- `mostrarMensajeExitoFirebase()`:
+  - Muestra una ventana emergente confirmando que el bache fue subido correctamente.
+
+### Clase `CorreoService`
+
+![image](https://github.com/user-attachments/assets/19d42c46-d2ba-4ff5-9ade-bd60aaa8e502)
+
+La clase `CorreoService` está diseñada para manejar el envío de correos electrónicos dentro del sistema.
+
+### Clase `EmailService`
+
+![image](https://github.com/user-attachments/assets/a3c70221-c184-43d7-84b7-9246f02eefbf)
+
+![image](https://github.com/user-attachments/assets/61e61fac-935b-4574-801d-2ca506d34721)
+
+`EmailService` permite que el sistema notifique de manera real a los responsables municipales o usuarios sobre el estado de los reportes.
+
+Esta clase utiliza la biblioteca `javax.mail` para conectarse a Internet y enviar correos verdaderos.
+
+**Método principal:**
+
+- `enviarCorreo(String destinatario, String asunto, String mensaje)`
+  - Configura las propiedades de conexión al servidor SMTP de Gmail.
+  - Autentica al remitente usando un correo y una clave de aplicación.
+  - Crea un mensaje con el destinatario, asunto y contenido.
+  - Envía el correo utilizando `Transport.send()`.
+
+### Clase `FirebaseConfig`
+
+![image](https://github.com/user-attachments/assets/1e0372fd-5b89-4d71-9643-1906cf6650b0)
+
+![image](https://github.com/user-attachments/assets/00a47731-f59f-4e57-afdb-d09c72e2c15a)
+
+Esta clase es fundamental para permitir que el sistema interactúe con Firebase, una plataforma en la nube donde se almacenan los reportes de baches.
+
+La clase `FirebaseConfig` se encarga de establecer la conexión entre el sistema Java y la base de datos Firebase Realtime Database. Esta clase se utiliza como una configuración centralizada para inicializar la app de Firebase una sola vez durante la ejecución del programa.
+
+### Interfaz `RegistroBaches`
+
+![image](https://github.com/user-attachments/assets/538cd2cf-17ba-406e-8179-861d17b27a71)
+
+Esta interfaz permite que el sistema sea modular y flexible, ya que cualquier clase que implemente `RegistroBaches` puede ser intercambiada sin afectar el resto del código.
+
+La interfaz `RegistroBaches` define un contrato que deben cumplir todas las clases encargadas de registrar baches en el sistema. Es decir, especifica los métodos mínimos que una clase debe implementar si desea gestionar el almacenamiento de reportes de baches.
+
+- `guardarBache(ReporteBache bache)`  
+  Indica que la clase debe implementar la lógica para guardar un bache (local o en Firebase).
+
+- `obtenerBachesLocales()`  
+  Define que debe existir una manera de obtener todos los baches almacenados localmente durante la sesión actual.
+
+- `mostrarMensajeExitoFirebase()`  
+  Requiere un método para mostrar un mensaje de confirmación al guardar exitosamente en Firebase.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
