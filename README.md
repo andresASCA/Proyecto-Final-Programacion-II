@@ -266,15 +266,18 @@ De ejemplo tomamos el nombre de Nicolas Ramos y le damos en aceptar y nos sale e
 
 y se nos abre un menú, donde esta:
 -ReportarBache: que es donde se puede reportar el bache, le damos clic ahi y nos sale lo siguiente
+
 ![image](https://github.com/user-attachments/assets/8d7cc0b3-963d-4d09-b641-e7d02751e1ec)
 
 Donde podemos ingresar manualmente la calle principal y secundaria de la dirección o a si prefiere de otra manera tenemos la opción de seleccionar en el mapa la ubicación, esa opcion es la más intuitiva.
 Para entrar al mapa le damos clic en selccionar en el mapa y nos aparece un mensaje de las instrucciones que toca seguir en el mapa entonces le damos en ok. Y ya podemos navegar en el mapa.
+
 ![image](https://github.com/user-attachments/assets/3bf20574-3a9f-49a2-8936-218be48480d3)
 
 Escojemos la ubicacion de la av. Amazonas y Alonso Pereira pero el mapa a veces no sabe detectar la calle secundaria y la ingresamos manualmente, tambien observamos que se nos descarga un .txt y es para que en la app al dar ok al mensaje 
 
 ![image](https://github.com/user-attachments/assets/2b05405e-0ca8-4dc0-9f96-3b82e3c2b6a4)
+
  A ese mensaje se llenen automaticamente las calles principales y secundarias, si nos sale en calle secundaria no encontrada, la podemos ingresar manualmente, ya que es un error del mapa, mas no de nuestro programa.
  
 ![image](https://github.com/user-attachments/assets/f5c7290a-0699-4d0e-bf34-54e16fb8ec20)
@@ -284,16 +287,21 @@ Como se ve en la imagen llenamos los campos que nos pide en este caso la descrip
 ![image](https://github.com/user-attachments/assets/cd5d237a-a18a-4230-a99f-533b7379e2df)
 
 ![image](https://github.com/user-attachments/assets/e27ae9ae-5adf-4e60-a1d1-d66317ccbe01)
+
 En esas imagenes se sube directamente a la base de datos de firebase y a la local. Y volvemos al menú principal.
 
 -VerBaches(Local): Aqui se muestra todo lo que ingresamos, ademas de la longitud y latitud de la direccion que nos da el mapa, es la base de datos del programa y se ve asi:
 
 ![image](https://github.com/user-attachments/assets/c1df76dd-9ea7-4f85-9c80-899f3e755796)
+
 Como se observa tambien aparece el estado: Pendiente eso quiere decir que todos los reportes bache que se pongan van a aparecer con el estado pendiente. Cerramos esa ventana y volvemos al menú principal.
 
 -VerBachesFirebase: Aqui se abre una ventana donde le damos clic en ir a firebase y no sale la base de datos con los mismos datos de base local, pero en la nube.
+
 ![image](https://github.com/user-attachments/assets/78e6a79d-24fa-479b-b7c9-5f7158194311)
+
 ![image](https://github.com/user-attachments/assets/78d65d97-6117-40e4-a732-302c78521351)
+
 Como se ve en la segunda imagen nos lleva al firebase pero aqui se nos salio de las manos ya que intentamos de todos los metodos posibles para que nos salga la info pero no pudimos y solo nos quedamos con la base de datos local de la app. Osea lo que se iba a hacer aqui lo vamos a aplicar en la VerBaches(Local).
 
 -Volver al inicio de Sesion: VUelve al inicio de sesion para que el municipio entre.
@@ -301,11 +309,13 @@ Como se ve en la segunda imagen nos lleva al firebase pero aqui se nos salio de 
 ![image](https://github.com/user-attachments/assets/0a4add5e-3703-4c2a-97cf-a23c8d1665c4)
 
 Ponemos el unico nombre que permite acceder a la otra ventana que es Municipio
+
 ![image](https://github.com/user-attachments/assets/a6c96312-0bce-4430-ba19-fc148956c18c)
 
 Le damos aceptar y nos sale el siguiente mensaje:
 
 ![image](https://github.com/user-attachments/assets/2290fd43-472c-4498-b904-ded36062d2d7)
+
 Le damos en ok y entramos a la ventana, donde el municipio va a ingresar el ID del bache generado aleatoriamente por la app, cabe recalcar que es un ID unico de 5 digitos, donde el municipio ingresa ese ID para actualizar el estado del bache a arreglado.
 Entonces ponemos el ID del bache que nos genero y estaba en VerBaches(local).
 
@@ -314,9 +324,11 @@ Entonces ponemos el ID del bache que nos genero y estaba en VerBaches(local).
 Le damos clic en aceptar y nos sale lo siguiente:
 
 ![image](https://github.com/user-attachments/assets/943a5cb0-44ff-4251-a5cd-c6be28fdfaf0)
+
  Cuando le damos OK vuelve al iniciar sesion y unicamente debemos entrar con el nombre que ingreso el usuario, en este caso Nicolas Ramos
  
  ![image](https://github.com/user-attachments/assets/dcee09ae-fccb-4f60-9ec1-f211febb7029)
+ 
  Y entramos a VerBaches(Local), para constatar que ya se arreglo el estado del bache.
  
 ![image](https://github.com/user-attachments/assets/37605deb-1444-4152-8039-86418fadf4ef)
@@ -326,9 +338,11 @@ Efectivamente vemos que ya sale arreglado, cabe señalar que mientras se este ej
 El usuario Nicolas Ramos puede ingresar los bache que quiera, como se a continuacion:
 
 ![image](https://github.com/user-attachments/assets/0271df95-8ffd-4c97-9059-112f05090300)
+
 Le damos clic en guardar y nos vamos a VerBaches(Local)
 
 ![image](https://github.com/user-attachments/assets/103950b1-bbbe-4d17-9184-cca05e2dbcc3)
+
 Y vemos que tambien esta el reporte del bache que agrego recien y el que ya esta arreglado.
 
 Finalmente le ponemos en el boton salir y se cierra la app
