@@ -8,7 +8,63 @@ Donde esto se explicara a continuación.
 Nuestro proyecto busca que nuestra ciudad y sus calles sean las más hermosas del Ecuador y también dar una gran ayuda ala ciudadania con este programa ya que va a ser organizado y así el municipio pueda trabajar de la mejor manera.
 
 ## Paquetes y Clases del proyecto
+## Paquete **Interfaz**
+### Clase FormularioBache 
+La clase **FormularioBache** es una ventana gráfica (**JFrame**) que permite al usuario llenar un formulario para reportar un bache. Incluye campos para ingresar la calle principal, calle secundaria y una descripción del problema. También tiene un botón para seleccionar la ubicación en un mapa, lo cual carga automáticamente la dirección y coordenadas desde un archivo **ubicacion.txt**. Finalmente, al hacer clic en "Guardar", se valida la información y se crea un objeto **ReporteBache** que se guarda usando el servicio **RegistroBaches**. Esta clase gestiona tanto la interfaz visual como la lógica de validación y carga de datos desde el mapa.
 
+![FB 1 ](https://github.com/user-attachments/assets/dd47adf6-195b-4a38-a43e-d86f09b3194a)
+![FB 2](https://github.com/user-attachments/assets/b527d0ce-2168-4d2a-8b18-b918e6810376)
+![FB 3](https://github.com/user-attachments/assets/74366ee1-d118-4825-9fee-45c72f85fac6)
+![FB 4](https://github.com/user-attachments/assets/5e3e85e3-e95b-47e3-95a0-163902286025)
+![FB 5](https://github.com/user-attachments/assets/8aad9bf9-bd9d-4c99-8707-5b06ab8797da)
+### Clase IniciarSesion
+La clase **IniciarSesion** es la **pantalla principal de inicio de sesión del sistema.** Permite al usuario ingresar su nombre en un campo de texto y pulsar el botón **"Iniciar sesión".** Si el nombre ingresado es **"municipio"**, se reconoce como **usuario del municipio** y se abre una ventana especial **(VentanaMunicipio)** para gestionar baches. Si se ingresa cualquier otro nombre, se abre el **menú principal normal (MenuPrincipal)** y se muestra un saludo personalizado. Si el campo está vacío, se muestra una advertencia. Esta clase actúa como **punto de entrada** (main) del programa y controla el acceso según el tipo de usuario.
+
+![INICIAR 1 ](https://github.com/user-attachments/assets/916b53be-6b8a-4003-991b-691b55e0a891)
+![INICIAR 2 ](https://github.com/user-attachments/assets/dbbdbf16-7f59-4cf8-a2a9-52f033c90db2)
+### Clase JSBridge
+La clase **JSBridge** actúa como un **puente de comunicación entre Java y JavaScript**. Es utilizada para recibir desde un **mapa HTML** (mediante una llamada desde JavaScript) los datos de la dirección seleccionada: **calle principal**, **calle secundaria**, **latitud** y **longitud**. Al recibir estos datos, los envía al formulario de reporte (**FormularioBache**) para que se llenen automáticamente los campos. Además, muestra un **mensaje de éxito** y **cierra la ventana del mapa**. Esta clase permite la integración entre la **interfaz gráfica en Java** y la **interacción del usuario con un mapa web**.
+
+![JSBRIDGE ](https://github.com/user-attachments/assets/f0fb4291-4c6e-47f6-b806-8381b7211774)
+### Clase ListaBaches
+La clase **ListaBaches** muestra una ventana tipo **JFrame** que permite al usuario ver la lista de baches guardados localmente. Utiliza el servicio **RegistroBaches** para obtener los objetos **ReporteBache** desde el almacenamiento local. Los datos se presentan en un **JTextArea** de solo lectura, incluyendo el **ID**, la **latitud**, **longitud** y la **descripción** de cada bache. Esta clase es útil para revisar rápidamente los reportes realizados sin necesidad de acceder a la base de datos en la nube.
+
+![LISTA DE BACHES](https://github.com/user-attachments/assets/b52d81af-0055-4792-8323-16a74bbf2fb1)
+### Clase ListaBachesFirebase
+La clase **ListaBachesFirebase** es una ventana **JFrame** que permite al usuario visualizar la lista de baches almacenados en la base de datos Firebase. Se conecta al nodo **baches** usando **FirebaseConfig** y escucha una única vez (**addListenerForSingleValueEvent**) para obtener los datos. Los objetos recuperados se interpretan como instancias de **ReporteBache** y se muestran en un **JTextArea**, incluyendo su **ID**, **latitud**, **longitud**, **descripción** y **estado**. Si ocurre un error en la carga, se muestra un mensaje de error en la interfaz. Esta clase es clave para acceder a la información remota almacenada en la nube.
+
+![FIRBASE 1](https://github.com/user-attachments/assets/77e93b90-c10e-4c9a-8e17-03e74313a82a)
+![FIRBASE 2](https://github.com/user-attachments/assets/edef616a-136b-40c3-8ee3-aedc591972bc)
+### Clase MapaDireccionWindow
+La clase **MapaDireccionWindow** abre una ventana gráfica en Java (**JFrame**) que contiene un mapa interactivo implementado en HTML mediante un **WebView** de JavaFX. Utiliza un **JFXPanel** para integrar el componente JavaFX dentro de Swing. Al cargar el archivo **mapa.html** desde la carpeta **Resources**, se muestra el mapa al usuario. Cuando el documento del mapa se carga completamente, se crea un puente **JSBridge** y se inyecta en la página web como el objeto **window.app**. Esto permite que, al seleccionar una dirección en el mapa, los datos se envíen automáticamente al formulario **FormularioBache**. Esta clase facilita la selección visual de una dirección sobre el mapa y su integración con la interfaz gráfica Java.
+
+![MAPA DE DIRECCION](https://github.com/user-attachments/assets/af769e7d-93ae-4ab5-a1f6-1295c96e1319)
+### Clase MapaInteractivo
+La clase **MapaInteractivo** permite abrir el archivo **mapa.html** en el navegador predeterminado del sistema operativo. Utiliza la clase **Desktop** de Java para acceder al navegador y cargar el mapa ubicado en la carpeta **src/Resources**. Antes de abrir el archivo, se verifica que exista físicamente; si no se encuentra, lanza una excepción con un mensaje de error. Esta clase se usa como alternativa simple a JavaFX para mostrar el mapa, permitiendo que el usuario seleccione una ubicación directamente desde el navegador web.
+
+![MAPA INTERACTIVO 1](https://github.com/user-attachments/assets/ddcf2520-b578-49cb-97b7-e54c15d2f658)
+### Clase MapaSeleccion
+La clase **MapaSeleccion** permite mostrar un mapa interactivo en una ventana Java (**JFrame**) utilizando un **JFXPanel** con **WebView** de JavaFX. Carga el archivo **mapa.html** desde la carpeta **Resources** y crea un puente entre JavaScript y Java usando una clase interna llamada **JSBridge**. Esta clase recibe la dirección seleccionada por el usuario en el mapa y se la comunica a través del patrón **Listener** definido por la interfaz **DireccionListener**. Al seleccionar una dirección, la ventana se cierra y se muestra un mensaje de confirmación. Esta implementación es útil cuando se desea manejar la dirección como una sola cadena y permite una comunicación directa JS → Java en tiempo real.
+
+![MAPA DE SELECCION 1](https://github.com/user-attachments/assets/da28ff6c-ea69-4df3-82f7-919f8fc7fc4e)
+![MAPA DE SELECCION 2 ](https://github.com/user-attachments/assets/74367c2e-4c2b-45f9-953c-8707becd0933)
+### Clase MapaSelector
+La clase **MapaSelector** permite abrir el archivo **mapa.html** directamente en el navegador predeterminado del sistema operativo. Utiliza la clase **Desktop** de Java para lanzar el navegador y mostrar el mapa interactivo desde la ruta **src/Resources**. Antes de abrirlo, verifica si el archivo realmente existe, y en caso contrario muestra un mensaje de error en la consola. Esta clase ofrece una forma sencilla de permitir al usuario seleccionar una ubicación en el mapa sin depender de componentes JavaFX, facilitando la interacción con HTML desde el navegador.
+
+![MAPA SELECTOR ](https://github.com/user-attachments/assets/66a2bf5d-71f5-42fc-8757-cd72982277c3)
+### Clase MenuPrincipal
+La clase **MenuPrincipal** representa la pantalla principal del sistema una vez que el usuario ha iniciado sesión. Es una ventana **JFrame** que muestra un mensaje de bienvenida personalizado con el **nombre del usuario** y contiene cinco componentes: un saludo y cuatro botones. Los botones permiten al usuario: **reportar un bache**, **ver baches guardados localmente**, **ver baches almacenados en Firebase**, y **salir del sistema**. Cada botón abre una ventana distinta (**FormularioBache**, **ListaBaches**, **ListaBachesFirebase**) o termina la ejecución del programa. Esta clase actúa como centro de navegación para acceder a todas las funcionalidades del sistema.
+
+![MENU PRINCIPAL ](https://github.com/user-attachments/assets/ab7b99da-9156-4695-a3b0-f64cc4591028)
+### Clase VentanaMapa
+La clase **VentanaMapa** crea una ventana interactiva en Java (**JFrame**) que permite al usuario seleccionar una ubicación directamente sobre un mapa HTML. Utiliza **JavaFX** embebido dentro de Swing mediante **JFXPanel**, y carga el archivo **mapa.html** desde la carpeta **Resources**. Una vez que el mapa se ha cargado completamente, se establece una conexión entre Java y JavaScript usando **JSBridge**, que se inyecta como el objeto **javaBridge** en el entorno web. Cuando el usuario selecciona una dirección, esta se envía automáticamente al formulario **FormularioBache**. Esta clase es clave para habilitar la selección de ubicación desde un mapa integrado dentro de la aplicación.
+
+![VENTANA](https://github.com/user-attachments/assets/52c78d73-76c7-499f-ac97-31e43694d612)
+### Clase VentanaMunicipio
+La clase **VentanaMunicipio** permite al personal autorizado (como el municipio) actualizar el estado de un bache a "Bache arreglado" ingresando su **ID**. Es una ventana **JFrame** sencilla que contiene un campo de texto (**JTextField**) y un botón para confirmar la acción. Al hacer clic en "Aceptar", se conecta a Firebase a través de **FirebaseConfig** y busca el bache por su **id** en el nodo **baches**. Si lo encuentra, actualiza su campo **estado** de manera asíncrona usando **setValueAsync**. Esta clase es esencial para que el municipio gestione el seguimiento y solución de los reportes ciudadanos desde la aplicación.
+
+![MUNICIPIO](https://github.com/user-attachments/assets/1cae8342-f7d9-4e4e-92cc-551e2f4282e6)
+![MUNICIPIO 2 ](https://github.com/user-attachments/assets/f87e217a-e657-4550-bd73-ff92a10e1a2a)
 ## Paquete `Mapa`
 ### Clase `GoogleMapsEmbed`
 
